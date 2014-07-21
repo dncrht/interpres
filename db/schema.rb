@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721210839) do
+ActiveRecord::Schema.define(version: 20140721211426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,5 +21,15 @@ ActiveRecord::Schema.define(version: 20140721210839) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "texts", force: true do |t|
+    t.text     "literal"
+    t.boolean  "accepted",   default: false, null: false
+    t.integer  "app_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "texts", ["app_id"], name: "index_texts_on_app_id", using: :btree
 
 end
