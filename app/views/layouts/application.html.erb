@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Interpres</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Interpres</title>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <header class="navbar navbar-default" role="navigation">
+      <nav class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Interpres</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
 
-</body>
+  </body>
 </html>
