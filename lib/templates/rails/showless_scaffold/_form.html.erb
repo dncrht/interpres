@@ -1,0 +1,30 @@
+<%%= form_for(@<%= singular_table_name %>) do |f| %>
+  <%%= errors_bar @<%= singular_table_name %> %>
+  <div class="row">
+    <div class="col-sm-8">
+
+<% attributes.each do |attribute| -%>
+      <div class="form-group">
+<% if attribute.password_digest? -%>
+        <%%= f.label :password %><br>
+        <%%= f.password_field :password %>
+      </div>
+      <div>
+        <%%= f.label :password_confirmation %><br>
+        <%%= f.password_field :password_confirmation %>
+<% else -%>
+  <%- if attribute.reference? -%>
+        <%%= f.label :<%= attribute.column_name %> %><br>
+        <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+  <%- else -%>
+        <%%= f.label :<%= attribute.name %> %><br>
+        <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  <%- end -%>
+<% end -%>
+      </div>
+    </div>
+  </div>
+<% end -%>
+  <%%= f.submit 'Save', class: 'btn btn-primary' %>
+  <%%= link_to 'Cancel', <%= index_helper %>_path, class: 'btn btn-default' %>
+<%% end %>
