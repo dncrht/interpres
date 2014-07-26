@@ -2,19 +2,23 @@ require 'rails_helper'
 
 describe ApplicationHelper do
 
-  describe '#error_alert' do
-    subject { helper.error_alert(entity) }
+  describe '#errors_bar' do
+
+    let(:without) { double(errors: {}) }
+    let(:with) { double(errors: {base: 'error'}) }
+    let(:text) { 'Please correct the highlighted fields.' }
 
     context 'no errors' do
-      let(:entity) { double(errors: {}) }
 
-      it { expect(subject).to be_nil }
+      it { expect(helper.errors_bar(without)).to be_nil }
+      it { expect(helper.errors_bar(without, without)).to be_nil }
     end
 
     context 'errors' do
-      let(:entity) { double(errors: {base: 'error'}) }
 
-      it { expect(subject).to have_selector('div.alert.alert-danger', 'Please correct the highlighted fields.') }
+      it { expect(helper.errors_bar(with)).to have_selector('div.alert.alert-danger', text: text) }
+      it { expect(helper.errors_bar(with, without)).to have_selector('div.alert.alert-danger', text: text) }
+      it { expect(helper.errors_bar(with, with)).to have_selector('div.alert.alert-danger', text: text) }
     end
   end
 end
