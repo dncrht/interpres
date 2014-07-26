@@ -1,0 +1,22 @@
+<%= messages_bar %>
+
+<p>
+  <%= link_to 'New language', new_language_path, class: 'btn btn-default' %>
+</p>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ISO 639-1 code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @languages.each do |language| %>
+      <tr>
+        <td><%= link_to language.name, edit_language_path(language.id) %></td>
+        <td><%= language.iso %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

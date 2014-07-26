@@ -1,0 +1,19 @@
+<%= form_for(@language) do |f| %>
+  <%= errors_bar @language %>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :iso, 'ISO 639-1 code' %>
+        <%= f.text_field :iso, :class => 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <%= f.submit 'Save', :class => 'btn btn-primary' %>
+  <%= link_to 'Cancel', languages_path, :class => 'btn btn-default' %>
+<% end %>
