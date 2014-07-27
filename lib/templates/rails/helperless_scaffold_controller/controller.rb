@@ -4,7 +4,7 @@ require_dependency "<%= namespaced_file_path %>/application_controller"
 <% end -%>
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
-  before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
+  before_action :set_<%= singular_table_name %>, only: [:edit, :update, :destroy]
 
   # GET <%= route_url %>
   def index
@@ -47,12 +47,10 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_<%= singular_table_name %>
     @<%= singular_table_name %> = <%= orm_class.find(class_name, "params[:id]") %>
   end
 
-  # Only allow a trusted parameter "white list" through.
   def <%= "#{singular_table_name}_params" %>
     <%- if attributes_names.empty? -%>
     params[:<%= singular_table_name %>]

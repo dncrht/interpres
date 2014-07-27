@@ -6,25 +6,27 @@
 <% attributes.each do |attribute| -%>
       <div class="form-group">
 <% if attribute.password_digest? -%>
-        <%%= f.label :password %><br>
-        <%%= f.password_field :password %>
+        <%%= f.label :password %>
+        <%%= f.password_field :password, class: 'form-control' %>
       </div>
       <div>
-        <%%= f.label :password_confirmation %><br>
-        <%%= f.password_field :password_confirmation %>
+        <%%= f.label :password_confirmation %>
+        <%%= f.password_field :password_confirmation, class: 'form-control' %>
 <% else -%>
   <%- if attribute.reference? -%>
-        <%%= f.label :<%= attribute.column_name %> %><br>
-        <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+        <%%= f.label :<%= attribute.column_name %> %>
+        <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: 'form-control' %>
   <%- else -%>
-        <%%= f.label :<%= attribute.name %> %><br>
-        <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+        <%%= f.label :<%= attribute.name %> %>
+        <%%= f.<%= attribute.field_type %> :<%= attribute.name %>, class: 'form-control' %>
   <%- end -%>
 <% end -%>
       </div>
+
+<% end -%>
     </div>
   </div>
-<% end -%>
+
   <%%= f.submit 'Save', class: 'btn btn-primary' %>
   <%%= link_to 'Cancel', <%= index_helper %>_path, class: 'btn btn-default' %>
 <%% end %>
