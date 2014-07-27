@@ -14,9 +14,11 @@
           <a class="navbar-brand" href="/">Interpres</a>
         </div>
         <ul class="nav navbar-nav">
+          <%= menu_item 'languages' do %><%= link_to 'Languages', languages_path %><% end %>
         </ul>
       </nav>
     </header>
+
     <div class="container">
       <%= yield %>
     </div>
