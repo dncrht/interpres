@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Languages</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
     <% @apps.each do |app| %>
       <tr>
         <td><%= app.name %></td>
+        <td><%= app.languages.map(&:iso).join(', ') %></td>
         <td><%= link_to 'Edit', edit_app_path(app) %></td>
         <td><%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
