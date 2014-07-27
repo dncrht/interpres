@@ -1,0 +1,26 @@
+<%= messages_bar %>
+
+<p>
+  <%= link_to "New text for #{@app.name}", new_text_path, class: 'btn btn-default' %>
+</p>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Literal</th>
+      <th>Accepted?</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @texts.each do |text| %>
+      <tr>
+        <td><%= text.literal %></td>
+        <td><%= text.accepted %></td>
+        <td><%= link_to 'Edit', edit_text_path(text) %></td>
+        <td><%= link_to 'Destroy', text, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

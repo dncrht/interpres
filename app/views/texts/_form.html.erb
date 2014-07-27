@@ -1,0 +1,23 @@
+<%= form_for(@text) do |f| %>
+  <%= errors_bar @text %>
+  <div class="row">
+    <div class="col-sm-8">
+
+      <div class="form-group">
+        <%= f.label :literal %>
+        <%= f.text_area :literal, class: 'form-control' %>
+      </div>
+
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :accepted %>
+          Accepted?
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', texts_path, class: 'btn btn-default' %>
+<% end %>
