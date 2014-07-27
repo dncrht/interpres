@@ -1,0 +1,24 @@
+<%= messages_bar %>
+
+<p>
+  <%= link_to 'New App', new_app_path, class: 'btn btn-default' %>
+</p>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @apps.each do |app| %>
+      <tr>
+        <td><%= app.name %></td>
+        <td><%= link_to 'Edit', edit_app_path(app) %></td>
+        <td><%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

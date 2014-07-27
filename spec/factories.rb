@@ -1,8 +1,14 @@
 FactoryGirl.define do
 
+  sequence(:name) { |n| "name#{n}" }
+
   factory :language do
     iso 'en'
-    sequence(:name) { |n| "name{n}" }
+    name
+  end
+
+  factory :app do
+    name
   end
 
 end

@@ -1,0 +1,16 @@
+<%= form_for(@app) do |f| %>
+  <%= errors_bar @app %>
+  <div class="row">
+    <div class="col-sm-8">
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
+
+    </div>
+  </div>
+
+  <%= f.submit 'Save', class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', apps_path, class: 'btn btn-default' %>
+<% end %>
