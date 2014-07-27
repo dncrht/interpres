@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>ISO 639-1 code</th>
+      <th>Apps</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= link_to language.name, edit_language_path(language.id) %></td>
         <td><%= language.iso %></td>
+        <td><%= language.apps.map(&:name).join(', ') %></td>
       </tr>
     <% end %>
   </tbody>
