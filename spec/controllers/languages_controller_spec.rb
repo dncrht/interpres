@@ -24,7 +24,7 @@ describe LanguagesController do
     describe '#update' do
       before { put :update, id: language.id, language: language_attributes }
 
-      context 'valid language'  do
+      context 'valid language' do
         let(:language_attributes) { language.attributes }
 
         it { expect(response).to redirect_to languages_path }

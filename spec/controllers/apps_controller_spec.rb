@@ -24,10 +24,18 @@ describe AppsController do
     describe '#update' do
       before { put :update, id: app.id, app: app_attributes }
 
-      context 'valid app'  do
+      context 'valid app' do
         let(:app_attributes) { app.attributes }
 
         it { expect(response).to redirect_to apps_path }
+      end
+
+      context 'valid app with language' do
+        let(:language) { create(:language) }
+        let(:app_attributes) { app.attributes.merge(languages: language.id) }
+
+        it { expect(response).to redirect_to apps_path }
+        it { expect(app.languages).to eq [language] }
       end
 
       context 'invalid app' do
@@ -52,12 +60,22 @@ describe AppsController do
     end
 
     describe '#create' do
+      let(:created_app) { App.find_by_name(app_attributes['name']) }
+
       before { post :create, app: app_attributes }
 
       context 'valid app' do
         let(:app_attributes) { app.attributes }
 
         it { expect(response).to redirect_to apps_path }
+      end
+
+      context 'valid app with language' do
+        let(:language) { create(:language) }
+        let(:app_attributes) { app.attributes.merge(languages: language.id) }
+
+        it { expect(response).to redirect_to apps_path }
+        it { expect(created_app.languages).to eq [language] }
       end
 
       context 'invalid app' do
