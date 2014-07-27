@@ -14,4 +14,17 @@ module ApplicationHelper
       content_tag :div, alert.html_safe, class: 'alert alert-warning'
     end
   end
+
+  def menu_item(item, tag = :li)
+    options = section == item ? {class: 'active'} : {}
+    content_tag tag, options do
+      yield
+    end
+  end
+
+  private
+
+  def section
+    content_for(:menu) ? content_for(:menu).strip.downcase : request.params[:controller]
+  end
 end

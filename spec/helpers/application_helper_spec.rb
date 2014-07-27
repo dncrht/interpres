@@ -47,4 +47,25 @@ describe ApplicationHelper do
       expect(helper.messages_bar).to have_selector('div.alert.alert-success', text: text)
     end
   end
+
+  describe '#menu_item' do
+    subject { helper.menu_item(item) { 'content' } }
+
+    before do
+      allow(helper).to receive(:section) { 'selected_list_item' }
+    end
+
+    context 'list item is selected' do
+      let(:item) { 'selected_list_item' }
+
+      it { is_expected.to have_selector('li.active', 'content') }
+    end
+
+    context 'list item is not selected' do
+      let(:item) { 'unselected_list_item' }
+
+      it { is_expected.to_not have_selector('li.active') }
+      it { is_expected.to have_selector('li', 'content') }
+    end
+  end
 end
