@@ -5,6 +5,7 @@ gem 'sqlite3'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.2'
+gem 'jquery-rails'
 
 gem 'spring', group: :development
 

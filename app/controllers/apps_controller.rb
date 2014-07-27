@@ -12,6 +12,11 @@ class AppsController < ApplicationController
     @app = App.new
   end
 
+  def set
+    session[:current_app_id] = params[:id]
+    redirect_to apps_path
+  end
+
   # GET /apps/1/edit
   def edit; end
 

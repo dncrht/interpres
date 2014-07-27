@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :apps
+  resources :texts
+
+  resources :apps do
+    get 'set', on: :member
+  end
 
   resources :languages
 
