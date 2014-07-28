@@ -31,7 +31,7 @@ describe AppsController do
       end
 
       context 'valid app with language' do
-        let(:language) { create(:language) }
+        let(:language) { app.languages.first }
         let(:app_attributes) { app.attributes.merge(languages: language.id) }
 
         it { expect(response).to redirect_to apps_path }

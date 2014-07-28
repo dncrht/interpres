@@ -19,7 +19,7 @@ class TextsController < ApplicationController
   def create
     @text = @app.texts.build(text_params)
 
-    if @text.save
+    if TextTranslationsCreation.new(@text).save_with_translations(params[:translations])
       redirect_to texts_path, notice: 'Text was successfully created.'
     else
       render :new
@@ -28,7 +28,9 @@ class TextsController < ApplicationController
 
   # PATCH/PUT /texts/1
   def update
-    if @text.update(text_params)
+    @text.attributes = text_params
+
+    if TextTranslationsCreation.new(@text).save_with_translations(params[:translations])
       redirect_to texts_path, notice: 'Text was successfully updated.'
     else
       render :edit
