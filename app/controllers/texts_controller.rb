@@ -55,6 +55,8 @@ class TextsController < ApplicationController
 
   def set_current_app
     @app = App.find_by_id(session[:current_app_id])
-    redirect_to app_path unless @app
+    unless @app
+      redirect_to(apps_path, notice: "Select an app from the dropdown to edit its text strings.<br>Don't have an app? Add one!")
+    end
   end
 end
