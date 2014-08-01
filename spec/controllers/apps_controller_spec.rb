@@ -21,6 +21,20 @@ describe AppsController do
       it { expect(response).to render_template 'edit' }
     end
 
+    describe '#set' do
+      before { get :set, id: app.id }
+
+      it { expect(session[:current_app_id]).to eq app.id.to_s }
+      it { expect(response).to redirect_to apps_path }
+    end
+
+    describe '#download' do
+      before { get :download, id: app.id, iso: 'en', format: :po }
+
+      it { expect(response).to be_success }
+      it { expect(response.header['Content-Disposition']).to eq %(attachment; filename="en.po") }
+    end
+
     describe '#update' do
       before { put :update, id: app.id, app: app_attributes }
 

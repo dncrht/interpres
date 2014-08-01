@@ -1,5 +1,5 @@
 class AppsController < ApplicationController
-  before_action :set_app, only: [:edit, :update, :destroy]
+  before_action :set_app, only: [:edit, :update, :destroy, :download]
   before_action :available_languages, only: [:new, :create, :edit, :update]
 
   # GET /apps
@@ -12,9 +12,22 @@ class AppsController < ApplicationController
     @app = App.new
   end
 
+  # GET /apps/1/set
   def set
     session[:current_app_id] = params[:id]
     redirect_to apps_path
+  end
+
+  # GET /apps/1/download/en.po
+  def download
+    language = Language.find_by(iso: params[:iso])
+
+    respond_to do |format|
+      format.po do
+        headers['Content-Disposition'] = %(attachment; filename="#{language.iso}.po")
+        render text: Translations::PoCompiler.new(@app).for_language(language)
+      end
+    end
   end
 
   # GET /apps/1/edit
