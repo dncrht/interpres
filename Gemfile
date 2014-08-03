@@ -7,6 +7,8 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.2'
 gem 'jquery-rails'
 
+gem 'sal-engine'
+
 gem 'spring', group: :development
 
 group :development, :test do
@@ -18,5 +20,4 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'capybara'
 end
