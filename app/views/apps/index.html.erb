@@ -11,6 +11,7 @@
       <th>Languages</th>
       <th>Text strings</th>
       <th>PO download</th>
+      <th>Token</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= app.languages.map(&:iso).join(', ') %></td>
         <td><%= app.texts.count %></td>
         <td><%= download_links(app, :po) %></td>
+        <td><%= show_token(app) %></td>
         <td><%= link_to 'Edit', edit_app_path(app) %></td>
         <td><%= link_to 'Destroy', app, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>

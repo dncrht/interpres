@@ -1,5 +1,5 @@
 class AppsController < ApplicationController
-  before_action :set_app, only: [:edit, :update, :destroy, :download]
+  before_action :set_app, only: [:edit, :update, :destroy, :download, :create_token]
   before_action :available_languages, only: [:new, :create, :edit, :update]
 
   # GET /apps
@@ -43,6 +43,15 @@ class AppsController < ApplicationController
     else
       render :new
     end
+  end
+
+  # PATCH /apps/1/token
+  def create_token
+    @app.update_column :token, SecureRandom.hex(32)
+
+    flash[:show_token] = true
+
+    redirect_to apps_path
   end
 
   # PATCH/PUT /apps/1

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :apps do
     get 'set', on: :member
     get 'download/:iso', action: 'download', on: :member, as: 'download'
+    patch 'token', action: 'create_token', on: :member, as: 'token'
   end
 
   resources :languages

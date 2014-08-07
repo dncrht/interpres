@@ -35,6 +35,14 @@ describe AppsController do
       it { expect(response.header['Content-Disposition']).to eq %(attachment; filename="en.po") }
     end
 
+    describe '#create_token' do
+      before { patch :create_token, id: app.id }
+
+      it { expect(flash[:show_token]).to be_truthy }
+      it { expect(app.reload.token).to be_present }
+      it { expect(response).to redirect_to apps_path }
+    end
+
     describe '#update' do
       before { put :update, id: app.id, app: app_attributes }
 
