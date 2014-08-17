@@ -9,6 +9,25 @@ describe TextsController do
     it { expect(flash[:notice]).to eq "Select an app from the dropdown to edit its text strings.<br>Don't have an app? Add one!" }
   end
 
+  context 'app selected via token' do
+
+    let(:app) { create(:app, token: '123456') }
+    let(:text) { build(:text, app: app) }
+    let(:text_attributes) { text.attributes }
+
+    it 'does not create a text if unauthenticated' do
+      post :create, text: text_attributes, app_token: 'invalid'
+
+      expect(response.code).to eq '403'
+    end
+
+    it 'creates a text when authenticated' do
+      expect {
+        post :create, text: text_attributes, app_token: app.token
+      }.to change(Text, :count).by 1
+    end
+  end
+
   context 'app selected' do
 
     let(:app) { create(:app) }
