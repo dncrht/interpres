@@ -30,6 +30,16 @@ class AppsController < ApplicationController
     end
   end
 
+  # GET /apps/enabled_languages
+  def enabled_languages
+    app = App.find_by(token: params[:app_token])
+    if app
+      render json: app.languages.map(&:iso)
+    else
+      render text: '403 Forbidden', status: 403
+    end
+  end
+
   # GET /apps/1/edit
   def edit; end
 

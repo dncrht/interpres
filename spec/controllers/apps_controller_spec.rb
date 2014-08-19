@@ -2,6 +2,22 @@ require 'rails_helper'
 
 describe AppsController do
 
+  context 'app selected via token' do
+    let!(:app) { create(:app, token: '123456') }
+
+    it 'returns 403 if unauthenticated' do
+      get :enabled_languages, app_token: 'invalid'
+
+      expect(response.code).to eq '403'
+    end
+
+    it 'returns app languages when authenticated' do
+      get :enabled_languages, app_token: app.token
+
+      expect(response.body).to eq '["en"]'
+    end
+  end
+
   context 'with an existing app' do
     let(:app) { create(:app) }
 
