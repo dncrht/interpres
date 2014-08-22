@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
-gem 'sqlite3'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.2'
+gem 'uglifier'
 gem 'jquery-rails'
 
 gem 'sal-engine'
@@ -19,5 +19,9 @@ group :development, :test do
 end
 
 group :test do
+  gem 'sqlite3'
   gem 'factory_girl_rails'
 end
+
+gem 'rails_12factor', group: :production
+ruby '2.1.1'
