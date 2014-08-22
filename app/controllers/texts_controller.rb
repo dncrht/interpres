@@ -17,7 +17,7 @@ class TextsController < ApplicationController
 
   # GET /texts/new
   def new
-    @text = Text.new
+    @text = @app.texts.build
   end
 
   # GET /texts/1/edit
