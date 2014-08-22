@@ -21,20 +21,20 @@ describe Translations::PoCompiler do
       expect(subject).to eq <<-EOF
 msgid ""
 msgstr ""
-Project-Id-Version: Interpres
-POT-Creation-Date: 2014-07-31 21:29:49 UTC
-PO-Revision-Date: 2014-07-31 21:29:49 UTC
-Language: en
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+"Project-Id-Version: Interpres\\n"
+"POT-Creation-Date: 2014-07-31 21:29:49 UTC\\n"
+"PO-Revision-Date: 2014-07-31 21:29:49 UTC\\n"
+"Language: en\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
 
 
 msgid "text\\"1\\""
-msgid "translation\\"1\\""
+msgstr "translation\\"1\\""
 
 msgid "text2"
-msgid ""
+msgstr ""
 EOF
     end
   end
