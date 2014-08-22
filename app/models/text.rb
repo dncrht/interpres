@@ -3,6 +3,7 @@ class Text < ActiveRecord::Base
   has_many :translations
 
   validates :literal, presence: true
+  validates :literal, uniqueness: {scope: :app_id}
 
   def translations_available_languages
     app.languages.by_iso.map do |language|
