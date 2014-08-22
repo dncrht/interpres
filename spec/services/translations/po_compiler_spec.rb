@@ -10,9 +10,9 @@ describe Translations::PoCompiler do
 
     subject { described_class.new(app).for_language(en) }
 
-    let(:text1) { create(:text, literal: 'text1', app: app) }
+    let(:text1) { create(:text, literal: 'text"1"', app: app) }
     let(:text2) { create(:text, literal: 'text2', app: app) }
-    let!(:translation1) { create(:translation, literal: 'translation1', text: text1, language: en) }
+    let!(:translation1) { create(:translation, literal: 'translation"1"', text: text1, language: en) }
     let!(:translation2) { create(:translation, literal: 'translation2', text: text2, language: es) }
 
     it 'produces expected output' do
@@ -30,8 +30,8 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 
-msgid "text1"
-msgid "translation1"
+msgid "text\\"1\\""
+msgid "translation\\"1\\""
 
 msgid "text2"
 msgid ""

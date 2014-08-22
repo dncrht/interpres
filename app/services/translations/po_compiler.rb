@@ -32,10 +32,17 @@ module Translations
         translation_literal = text.translations.find_by_language_id(language.id).try(:literal)
 
         [
-          %(msgid "#{text.literal}"),
-          %(msgid "#{translation_literal}"\n)
+          %(msgid "#{escape(text.literal)}"),
+          %(msgid "#{escape(translation_literal)}"\n)
         ]
       end.flatten.join("\n")
+    end
+
+    private
+
+    def escape(str)
+      return unless str
+      str.gsub '"', '\"'
     end
   end
 end
