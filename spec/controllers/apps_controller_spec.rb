@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe AppsController do
 
+  before do
+    ENV['HTTP_USER'] = nil
+  end
+
   context 'app selected via token' do
     let!(:app) { create(:app, token: '123456') }
 

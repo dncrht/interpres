@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe TextsController do
 
+  before do
+    ENV['HTTP_USER'] = nil
+  end
+
   context 'no app selected' do
     before { get :index }
 

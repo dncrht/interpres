@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe LanguagesController do
 
+  before do
+    ENV['HTTP_USER'] = nil
+  end
+
   context 'with an existing language' do
     let(:language) { create(:language) }
 
