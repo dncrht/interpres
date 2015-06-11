@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth, :available_apps
 
+  helper Sal::ApplicationHelper
+
   private
 
   def basic_auth
