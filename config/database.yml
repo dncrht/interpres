@@ -4,8 +4,6 @@ development:
   encoding: unicode
   database: interpres
   pool: 5
-  username: dummy
-  password: dummy
 
 test:
   adapter: sqlite3
