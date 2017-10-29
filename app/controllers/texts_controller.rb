@@ -10,7 +10,7 @@ class TextsController < ApplicationController
       format.html
       format.po do
         language = Language.find_by(iso: params[:iso])
-        render text: Translations::PoCompiler.new(@app).for_language(language)
+        render plain: Translations::PoCompiler.new(@app).for_language(language)
       end
     end
   end
@@ -65,7 +65,7 @@ class TextsController < ApplicationController
     @app = App.find_by(id: session[:current_app_id]) || App.find_by(token: params[:app_token])
     unless @app
       if params[:app_token] # request is from API
-        render text: '403 Forbidden', status: 403
+        render plain: '403 Forbidden', status: 403
       else
         redirect_to(apps_path, notice: "Select an app from the dropdown to edit its text strings.<br>Don't have an app? Add one!")
       end

@@ -27,7 +27,7 @@ describe ApplicationController do
       ENV['HTTP_PASSWORD'] = '123456'
       basic_auth = ActionController::HttpAuthentication::Basic.encode_credentials ENV['HTTP_USER'], ENV['HTTP_PASSWORD']
 
-      get apps_path, {}, {'HTTP_AUTHORIZATION' => basic_auth}
+      get apps_path, headers: {'HTTP_AUTHORIZATION' => basic_auth}
 
       expect(response).to be_success
     end

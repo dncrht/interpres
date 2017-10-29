@@ -18,7 +18,7 @@ describe LanguagesController do
     end
 
     describe '#edit' do
-      before { get :edit, id: language.id }
+      before { get :edit, params: {id: language.id} }
 
       it { expect(response).to be_success }
       it { expect(assigns(:language)).to eq language }
@@ -26,7 +26,7 @@ describe LanguagesController do
     end
 
     describe '#update' do
-      before { put :update, id: language.id, language: language_attributes }
+      before { put :update, params: {id: language.id, language: language_attributes} }
 
       context 'valid language' do
         let(:language_attributes) { language.attributes }
@@ -35,7 +35,7 @@ describe LanguagesController do
       end
 
       context 'invalid language' do
-        let(:language_attributes) { language.attributes.merge(name: nil) }
+        let(:language_attributes) { language.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:language)).to eq language }
@@ -56,7 +56,7 @@ describe LanguagesController do
     end
 
     describe '#create' do
-      before { post :create, language: language_attributes }
+      before { post :create, params: {language: language_attributes} }
 
       context 'valid language' do
         let(:language_attributes) { language.attributes }
@@ -65,7 +65,7 @@ describe LanguagesController do
       end
 
       context 'invalid language' do
-        let(:language_attributes) { language.attributes.merge(name: nil) }
+        let(:language_attributes) { language.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:language)).to be_a Language }

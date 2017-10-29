@@ -20,14 +20,14 @@ describe TextsController do
     let(:text_attributes) { text.attributes }
 
     it 'does not create a text if unauthenticated' do
-      post :create, text: text_attributes, app_token: 'invalid'
+      post :create, params: {text: text_attributes, app_token: 'invalid'}
 
       expect(response.code).to eq '403'
     end
 
     it 'creates a text when authenticated' do
       expect {
-        post :create, text: text_attributes, app_token: app.token
+        post :create, params: {text: text_attributes, app_token: app.token}
       }.to change(Text, :count).by 1
     end
   end
@@ -52,7 +52,7 @@ describe TextsController do
       end
 
       describe '#edit' do
-        before { get :edit, id: text.id }
+        before { get :edit, params: {id: text.id} }
 
         it { expect(response).to be_success }
         it { expect(assigns(:text)).to eq text }
@@ -60,7 +60,7 @@ describe TextsController do
       end
 
       describe '#update' do
-        before { put :update, id: text.id, text: text_attributes }
+        before { patch :update, params: {id: text.id, text: text_attributes} }
 
         context 'valid text' do
           let(:text_attributes) { text.attributes }
@@ -69,7 +69,7 @@ describe TextsController do
         end
 
         context 'invalid text' do
-          let(:text_attributes) { text.attributes.merge(literal: nil) }
+          let(:text_attributes) { text.attributes.merge('literal' => nil) }
 
           it { expect(response).to be_success }
           it { expect(assigns(:text)).to eq text }
@@ -90,7 +90,7 @@ describe TextsController do
       end
 
       describe '#create' do
-        before { post :create, text: text_attributes }
+        before { post :create, params: {text: text_attributes} }
 
         context 'valid text' do
           let(:text_attributes) { text.attributes }
@@ -99,7 +99,7 @@ describe TextsController do
         end
 
         context 'invalid text' do
-          let(:text_attributes) { text.attributes.merge(literal: nil) }
+          let(:text_attributes) { text.attributes.merge('literal' => nil) }
 
           it { expect(response).to be_success }
           it { expect(assigns(:text)).to be_a Text }

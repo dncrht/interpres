@@ -10,13 +10,13 @@ describe AppsController do
     let!(:app) { create(:app, token: '123456') }
 
     it 'returns 403 if unauthenticated' do
-      get :enabled_languages, app_token: 'invalid'
+      get :enabled_languages, params: {app_token: 'invalid'}
 
       expect(response.code).to eq '403'
     end
 
     it 'returns app languages when authenticated' do
-      get :enabled_languages, app_token: app.token
+      get :enabled_languages, params: {app_token: app.token}
 
       expect(response.body).to eq '["en"]'
     end
@@ -34,7 +34,7 @@ describe AppsController do
     end
 
     describe '#edit' do
-      before { get :edit, id: app.id }
+      before { get :edit, params: {id: app.id} }
 
       it { expect(response).to be_success }
       it { expect(assigns(:app)).to eq app }
@@ -42,21 +42,21 @@ describe AppsController do
     end
 
     describe '#set' do
-      before { get :set, id: app.id }
+      before { get :set, params: {id: app.id} }
 
       it { expect(session[:current_app_id]).to eq app.id.to_s }
       it { expect(response).to redirect_to apps_path }
     end
 
     describe '#download' do
-      before { get :download, id: app.id, iso: 'en', format: :po }
+      before { get :download, params: {id: app.id, iso: 'en', format: :po} }
 
       it { expect(response).to be_success }
       it { expect(response.header['Content-Disposition']).to eq %(attachment; filename="en.po") }
     end
 
     describe '#create_token' do
-      before { patch :create_token, id: app.id }
+      before { patch :create_token, params: {id: app.id} }
 
       it { expect(flash[:show_token]).to be_truthy }
       it { expect(app.reload.token).to be_present }
@@ -64,7 +64,7 @@ describe AppsController do
     end
 
     describe '#update' do
-      before { put :update, id: app.id, app: app_attributes }
+      before { patch :update, params: {id: app.id, app: app_attributes} }
 
       context 'valid app' do
         let(:app_attributes) { app.attributes }
@@ -81,7 +81,7 @@ describe AppsController do
       end
 
       context 'invalid app' do
-        let(:app_attributes) { app.attributes.merge(name: nil) }
+        let(:app_attributes) { app.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:app)).to eq app }
@@ -104,7 +104,7 @@ describe AppsController do
     describe '#create' do
       let(:created_app) { App.find_by_name(app_attributes['name']) }
 
-      before { post :create, app: app_attributes }
+      before { post :create, params: {app: app_attributes} }
 
       context 'valid app' do
         let(:app_attributes) { app.attributes }
@@ -121,7 +121,7 @@ describe AppsController do
       end
 
       context 'invalid app' do
-        let(:app_attributes) { app.attributes.merge(name: nil) }
+        let(:app_attributes) { app.attributes.merge('name' => nil) }
 
         it { expect(response).to be_success }
         it { expect(assigns(:app)).to be_an App }

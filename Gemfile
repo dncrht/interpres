@@ -1,15 +1,19 @@
 source 'https://rubygems.org'
+ruby '2.4.2'
 
-gem 'rails', '4.1.4'
+gem 'rails'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'bootstrap-sass', '~> 3.2'
 gem 'uglifier'
 gem 'jquery-rails'
 
 gem 'sal-engine'
 
-gem 'spring', group: :development
+group :development do
+  gem 'listen'
+  gem 'spring-commands-rspec'
+end
 
 group :development, :test do
   gem 'pry'
@@ -20,8 +24,8 @@ end
 
 group :test do
   gem 'sqlite3'
+  gem 'rails-controller-testing'
   gem 'factory_girl_rails'
 end
 
 gem 'rails_12factor', group: :production
-ruby '2.1.2'

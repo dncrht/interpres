@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,47 +12,42 @@
 
 ActiveRecord::Schema.define(version: 20140807203046) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "apps", force: true do |t|
-    t.string   "name"
+  create_table "apps", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "token"
+    t.string "token"
   end
 
-  create_table "apps_languages", id: false, force: true do |t|
+  create_table "apps_languages", id: false, force: :cascade do |t|
     t.integer "app_id"
     t.integer "language_id"
   end
 
-  create_table "languages", force: true do |t|
-    t.string   "iso"
-    t.string   "name"
+  create_table "languages", force: :cascade do |t|
+    t.string "iso"
+    t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "texts", force: true do |t|
-    t.text     "literal"
-    t.boolean  "accepted",   default: false, null: false
-    t.integer  "app_id"
+  create_table "texts", force: :cascade do |t|
+    t.text "literal"
+    t.boolean "accepted", default: false, null: false
+    t.integer "app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["app_id"], name: "index_texts_on_app_id"
   end
 
-  add_index "texts", ["app_id"], name: "index_texts_on_app_id", using: :btree
-
-  create_table "translations", force: true do |t|
-    t.text     "literal"
-    t.integer  "text_id"
-    t.integer  "language_id"
+  create_table "translations", force: :cascade do |t|
+    t.text "literal"
+    t.integer "text_id"
+    t.integer "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["language_id"], name: "index_translations_on_language_id"
+    t.index ["text_id"], name: "index_translations_on_text_id"
   end
-
-  add_index "translations", ["language_id"], name: "index_translations_on_language_id", using: :btree
-  add_index "translations", ["text_id"], name: "index_translations_on_text_id", using: :btree
 
 end

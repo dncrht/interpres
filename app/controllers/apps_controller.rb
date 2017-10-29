@@ -25,7 +25,7 @@ class AppsController < ApplicationController
     respond_to do |format|
       format.po do
         headers['Content-Disposition'] = %(attachment; filename="#{language.iso}.po")
-        render text: Translations::PoCompiler.new(@app).for_language(language)
+        render plain: Translations::PoCompiler.new(@app).for_language(language)
       end
     end
   end
@@ -36,7 +36,7 @@ class AppsController < ApplicationController
     if app
       render json: app.languages.map(&:iso)
     else
-      render text: '403 Forbidden', status: 403
+      render plain: '403 Forbidden', status: 403
     end
   end
 
