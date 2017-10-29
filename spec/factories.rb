@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   sequence(:name) { |n| "name#{n}" }
   sequence(:literal) { |n| "literal#{n}" }
