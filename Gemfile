@@ -4,7 +4,7 @@ ruby '2.4.2'
 gem 'rails'
 gem 'pg'
 gem 'sass-rails'
-gem 'bootstrap-sass', '~> 3.2'
+gem 'bootstrap-sass', '~> 3.4'
 gem 'uglifier'
 gem 'jquery-rails'
 
